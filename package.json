@@ -1,0 +1,30 @@
+{
+  "name": "jzor",
+  "version": "1.0.0",
+  "description": "JSON Schema Validator focused in error handler",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --coverage",
+    "lint": "eslint src/**",
+    "validate": "npm run lint && npm test",
+    "task:generate-readme": "node tasks/generate-readme/generate-readme.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/benhurott/jzor.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/benhurott/jzor/issues"
+  },
+  "homepage": "https://github.com/benhurott/jzor#readme",
+  "devDependencies": {
+    "eslint": "^5.12.1",
+    "jest": "^23.6.0"
+  },
+  "dependencies": {
+    "lodash": "^4.17.11"
+  }
+}
