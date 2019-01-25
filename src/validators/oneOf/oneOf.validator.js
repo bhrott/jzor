@@ -1,3 +1,5 @@
+const { getCurrentTranslation } = require('../../translation')
+
 const oneOfValidator = {
   $type: 'oneOf',
   validate: ctx => {
@@ -6,7 +8,7 @@ const oneOfValidator = {
     if (ctx.schema.accept.indexOf(ctx.value) < 0) {
       ctx.registerErrors({
         value: {
-          message: 'This value is not allowed',
+          message: getCurrentTranslation().validators.oneOf.errors.value,
           value: ctx.value
         }
       })

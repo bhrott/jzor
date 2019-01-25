@@ -1,4 +1,5 @@
 const _ = require('lodash')
+const { getCurrentTranslation } = require('../../translation')
 
 const booleanValidator = {
   $type: 'boolean',
@@ -8,7 +9,7 @@ const booleanValidator = {
     if (!_.isBoolean(ctx.value)) {
       ctx.registerErrors({
         type: {
-          message: 'The value should be a boolean',
+          message: getCurrentTranslation().validators.boolean.errors.type,
           value: ctx.value
         }
       })

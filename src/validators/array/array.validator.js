@@ -1,16 +1,19 @@
 const _ = require('lodash')
 const { createContext } = require('../../context')
+const { getCurrentTranslation } = require('../../translation')
 
 const arrayValidator = {
   $type: 'array',
   validate: ctx => {
     if (ctx.handlePreValidation().handled) return
     
+    const translation = getCurrentTranslation()
+
     // validate type
     if (!_.isArray(ctx.value)) {
       ctx.registerErrors({
         type: {
-          message: 'The value should be an array',
+          message: translation.validators.array.errors.type,
           value: ctx.value
         }
       })
@@ -23,7 +26,7 @@ const arrayValidator = {
     if (_.isNumber(ctx.schema.minItems)) {
       if (ctx.value.length < ctx.schema.minItems) {
         errors.minItems = {
-          message: `This field should contain at least ${ctx.schema.minItems} item(s)`,
+          message: translation.validators.array.errors.minItems(ctx),
           minItems: ctx.schema.minItems,
           currentItems: ctx.value.length,
           value: ctx.value
@@ -34,7 +37,7 @@ const arrayValidator = {
     if (_.isNumber(ctx.schema.maxItems)) {
       if (ctx.value.length > ctx.schema.maxItems) {
         errors.maxItems = {
-          message: `This field should contain at maximun ${ctx.schema.maxItems} item(s)`,
+          message: translation.validators.array.errors.maxItems(ctx),
           maxItems: ctx.schema.maxItems,
           currentItems: ctx.value.length,
           value: ctx.value
