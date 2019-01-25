@@ -14,7 +14,8 @@ function getValidators() {
   require('./array'),
   require('./number'),
   require('./boolean'),
-  require('./oneOf')
+  require('./oneOf'),
+  require('./date')
 ].forEach(validator => {
   registerValidator(validator)
 }))

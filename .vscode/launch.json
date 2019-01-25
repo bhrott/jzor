@@ -9,6 +9,20 @@
       "request": "launch",
       "name": "Launch Program",
       "program": "${workspaceFolder}/_test.js"
+    },
+    {
+      "name": "Jest",
+      "type": "node",
+      "request": "launch",
+      "env": { "NODE_ENV": "test" },
+      "cwd": "${workspaceRoot}",
+      "program": "${workspaceRoot}/node_modules/.bin/jest",
+      "stopOnEntry": false,
+      "args": [],
+      "runtimeArgs": ["--nolazy"],
+      "console": "internalConsole",
+      "sourceMaps": false,
+      "internalConsoleOptions": "openOnSessionStart"
     }
   ]
 }
