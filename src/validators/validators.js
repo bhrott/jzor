@@ -1,11 +1,13 @@
 const stringValidator = require('./string')
 const objectValidator = require('./object')
 const arrayValidator = require('./array')
+const numberValidator = require('./number')
 
 let validators = [
   stringValidator, 
   objectValidator,
-  arrayValidator
+  arrayValidator,
+  numberValidator
 ].reduce((acc, cur) => {
   acc[cur.$type] = cur
   return acc
