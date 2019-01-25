@@ -6,7 +6,7 @@
 const { validateSchema } = require('jzor')
 
 const schema = {
-  $type: 'string',
+  $type: 'object',
   props: {
     name: {
       $type: 'string'
