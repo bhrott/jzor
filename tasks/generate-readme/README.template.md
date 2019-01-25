@@ -4,6 +4,14 @@ JSON Schema Validator that let you know whata hell is happening!
 
 ![jzor-logo](docs/images/jzor-logo.png)
 
+## Install
+
+In terminal, run:
+
+```
+npm install jzor
+```
+
 ## Preview
 
 Create your schema:

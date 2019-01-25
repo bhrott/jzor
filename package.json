@@ -1,7 +1,7 @@
 {
   "name": "jzor",
-  "version": "1.0.0",
-  "description": "JSON Schema Validator focused in error handler",
+  "version": "1.1.0",
+  "description": "JSON Schema Validator that let you know whata hell is happening!",
   "main": "index.js",
   "scripts": {
     "test": "jest --coverage",
@@ -14,8 +14,8 @@
     "type": "git",
     "url": "git+https://github.com/benhurott/jzor.git"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["json", "schema", "validator", "errors"],
+  "author": "Ben-hur Santos Ott",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/benhurott/jzor/issues"
