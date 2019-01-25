@@ -2,7 +2,137 @@
 
 JSON Schema Validator that let you know whata hell is happening!
 
-![jzor-logo](assets/jzor-logo.png)
+![jzor-logo](docs/images/jzor-logo.png)
+
+## Preview
+
+Create your schema:
+
+```js
+const schema = {
+  $type: 'object',
+  props: {
+    name: {
+      $type: 'string',
+      minLength: 2,
+      maxLength: 50
+    },
+    age: {
+      $type: 'number',
+      positive: true
+    },
+    weapons: {
+      $type: 'array',
+      maxItems: 2,
+      item: [
+        {
+          $type: 'object',
+          props: {
+            title: {
+              $type: 'string',
+              minLength: 3,
+              maxLength: 50
+            },
+            damage: {
+              $type: 'number',
+              min: 0,
+              max: 999
+            }
+          }
+        }
+      ]
+    }
+  }
+}
+```
+
+Create the value to be validated:
+
+```js
+const value = {
+  name: 'Tr',
+  age: -5,
+  weapons: [
+    {
+      title: 'Storm Breaker',
+      damage: 1000
+    },
+    1,
+    {
+      title: 'Mjolnir',
+      damage: -5
+    }
+  ]
+}
+```
+
+Validate:
+
+```js
+const { validateSchema } = require('jzor')
+
+const result = validateSchema(schema, value)
+```
+
+Get the result:
+
+```js
+{
+  valid: false,
+  errors: {
+    '$root.age': {
+      positive: {
+        message: 'The value should be a positive number',
+        value: -5
+      }
+    },
+    '$root.weapons': {
+      maxItems: {
+        message: 'This field should contain at maximun 2 item(s)',
+        maxItems: 2,
+        currentItems: 3,
+        value: [
+          {
+            title: 'Storm Breaker',
+            damage: 1000
+          },
+          1,
+          {
+            title: 'Mjolnir',
+            damage: -5
+          }
+        ]
+      }
+    },
+    '$root.weapons.0': {
+      '$root.damage': {
+        max: {
+          message: 'The value should be equal or less than 999',
+          value: 1000,
+          max: 999
+        }
+      }
+    },
+    '$root.weapons.1': {
+      $root: {
+        type: {
+          message: 'The value should be an object',
+          value: 1
+        }
+      }
+    },
+    '$root.weapons.2': {
+      '$root.damage': {
+        min: {
+          message: 'The value should be equal or greater than 0',
+          value: -5,
+          min: 0
+        }
+      }
+    }
+  }
+}
+```
 
 ## Validators
 
