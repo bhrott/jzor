@@ -4,6 +4,13 @@ JSON Schema Validator that let you know whata hell is happening!
 
 ![jzor-logo](docs/images/jzor-logo.png)
 
+
+## Motivation
+
+I know we have thousands of consolidated json validators, but most of then don't provide one simple thing: **a good way to track the validation errors**.
+
+Razor provide detailed information about each validation and it's respective path, so, you can link your form directly to the error path if you want.
+
 ## Install
 
 In terminal, run:

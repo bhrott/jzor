@@ -8,7 +8,8 @@
     "lint": "eslint src/**",
     "validate": "npm run lint && npm test",
     "task:generate-readme": "node tasks/generate-readme/generate-readme.js",
-    "build": "npm run task:generate-readme && npm run validate"
+    "build": "npm run task:generate-readme && npm run validate",
+    "prepublish": "npm run build"
   },
   "repository": {
     "type": "git",
