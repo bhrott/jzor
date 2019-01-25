@@ -1,14 +1,17 @@
 const _ = require('lodash')
+const { getCurrentTranslation } = require('../../translation')
 
 const numberValidator = {
   $type: 'number',
   validate: ctx => {
     if (ctx.handlePreValidation().handled) return
 
+    const translation = getCurrentTranslation()
+
     if (!_.isNumber(ctx.value)) {
       ctx.registerErrors({
         type: {
-          message: 'The value should be a number',
+          message: translation.validators.number.errors.type,
           value: ctx.value
         }
       })
@@ -20,7 +23,7 @@ const numberValidator = {
     if (_.isNumber(ctx.schema.min)) {
       if (ctx.value < ctx.schema.min) {
         errors.min ={
-          message: `The value should be equal or greater than ${ctx.schema.min}`,
+          message: translation.validators.number.errors.min(ctx),
           value: ctx.value,
           min: ctx.schema.min
         }
@@ -30,7 +33,7 @@ const numberValidator = {
     if (_.isNumber(ctx.schema.max)) {
       if (ctx.value > ctx.schema.max) {
         errors.max ={
-          message: `The value should be equal or less than ${ctx.schema.max}`,
+          message: translation.validators.number.errors.max(ctx),
           value: ctx.value,
           max: ctx.schema.max
         }
@@ -40,7 +43,7 @@ const numberValidator = {
     if (ctx.schema.positive === true) {
       if (ctx.value < 0) {
         errors.positive ={
-          message: 'The value should be a positive number',
+          message: translation.validators.number.errors.positive,
           value: ctx.value
         }
       }
@@ -49,7 +52,7 @@ const numberValidator = {
     if (ctx.schema.negative === true) {
       if (ctx.value >= 0) {
         errors.negative ={
-          message: 'The value should be a negative number',
+          message: translation.validators.number.errors.negative,
           value: ctx.value
         }
       }

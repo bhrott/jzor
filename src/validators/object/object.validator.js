@@ -1,4 +1,5 @@
 const _ = require('lodash')
+const { getCurrentTranslation } = require('../../translation')
 
 const objectValidator = {
   $type: 'object',
@@ -8,7 +9,7 @@ const objectValidator = {
     if (!_.isObject(ctx.value)) {
       ctx.registerErrors({
         type: {
-          message: 'The value should be an object',
+          message: getCurrentTranslation().validators.object.errors.type,
           value: ctx.value
         }
       })

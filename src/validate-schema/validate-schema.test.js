@@ -164,3 +164,50 @@ test('invalid schema should return errors', () => {
     }
   })
 })
+
+test('validating all schemas should be succeed', () => {
+  const schema = {
+    $type: 'array',
+    item: [
+      {
+        $type: 'object',
+        props: {
+          name: {
+            $type: 'string'
+          },
+          email: {
+            $type: 'email'
+          },
+          level: {
+            $type: 'number'
+          },
+          birthDate: {
+            $type: 'date'
+          },
+          role: {
+            $type: 'oneOf',
+            accept: ['warrior', 'mage', 'ranger']
+          },
+          active: {
+            $type: 'boolean'
+          }
+        }
+      }
+    ]
+  }
+
+  const value = [
+    {
+      name: 'Zyon',
+      email: 'zyon@mid.com',
+      level: 5,
+      birthDate: new Date(),
+      role: 'warrior',
+      active: true
+    }
+  ]
+
+  const result = validateSchema(schema, value)
+
+  expect(result.valid).toBeTruthy()
+})
