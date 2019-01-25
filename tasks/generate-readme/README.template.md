@@ -1,6 +1,8 @@
 # jzor
 
-JSON Schema Validator focused in error handler!
+JSON Schema Validator that let you know whata hell is happening!
+
+![jzor-logo](assets/jzor-logo.png)
 
 ## Validators
 
