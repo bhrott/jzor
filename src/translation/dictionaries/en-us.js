@@ -1,6 +1,11 @@
 const enUS = {
   key: 'en-us',
   validators: {
+    global: {
+      errors: {
+        reject: 'This value is not allowed'
+      }
+    },
     array: {
       errors: {
         type: 'The value should be an array',

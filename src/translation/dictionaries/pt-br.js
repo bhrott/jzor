@@ -1,6 +1,11 @@
 const ptBR = {
   key: 'pt-br',
   validators: {
+    global: {
+      errors: {
+        reject: 'This value is not allowed'
+      }
+    },
     array: {
       errors: {
         type: 'O valor deve ser do tipo array',
