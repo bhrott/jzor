@@ -1,5 +1,8 @@
 # jzor
 
+![build-status-master](https://travis-ci.org/benhurott/jzor.svg?branch=master)
+
+
 JSON Schema Validator that let you know whata hell is happening!
 
 ![jzor-logo](docs/images/jzor-logo.png)
