@@ -13,7 +13,8 @@ function getValidators() {
   require('./object'),
   require('./array'),
   require('./number'),
-  require('./boolean')
+  require('./boolean'),
+  require('./oneOf')
 ].forEach(validator => {
   registerValidator(validator)
 }))
