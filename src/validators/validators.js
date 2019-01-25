@@ -1,17 +1,4 @@
-const stringValidator = require('./string')
-const objectValidator = require('./object')
-const arrayValidator = require('./array')
-const numberValidator = require('./number')
-
-let validators = [
-  stringValidator, 
-  objectValidator,
-  arrayValidator,
-  numberValidator
-].reduce((acc, cur) => {
-  acc[cur.$type] = cur
-  return acc
-}, {})
+let validators = []
 
 function registerValidator(validator) {
   validators[validator.$type] = validator
@@ -20,6 +7,16 @@ function registerValidator(validator) {
 function getValidators() {
   return validators
 }
+
+([
+  require('./string'),
+  require('./object'),
+  require('./array'),
+  require('./number'),
+  require('./boolean')
+].forEach(validator => {
+  registerValidator(validator)
+}))
 
 module.exports = {
   registerValidator,

@@ -73,6 +73,23 @@ const result = validateSchema(schema, value)
 | item | array of schemas | yes | | the schemas to validate the itens inside the array. If you provide more than one, it will validate the item agains all the schemas, if one of them is valid, it will consider a valid value |
 
 
+### Boolean
+
+#### Usage
+
+```js
+const { validateSchema } = require('jzor')
+
+const schema = {
+  $type: 'boolean'
+}
+
+const value = true
+
+const result = validateSchema(schema, value)
+```
+
+
 ### Number
 
 #### Usage
@@ -111,7 +128,7 @@ const result = validateSchema(schema, value)
 const { validateSchema } = require('jzor')
 
 const schema = {
-  $type: 'string',
+  $type: 'object',
   props: {
     name: {
       $type: 'string'
