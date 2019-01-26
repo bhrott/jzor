@@ -52,7 +52,7 @@ const arrayValidator = {
     const { getValidators } = require('../validators')
 
     for (let itemIndex = 0; itemIndex < ctx.value.length; itemIndex++) {
-      ctx.addToPath(`${itemIndex}`)
+      ctx.addToPath(`$${itemIndex}`)
 
       const itemValue = ctx.value[itemIndex]
 

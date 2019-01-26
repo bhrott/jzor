@@ -10,7 +10,8 @@ function validateSchema(schema, value) {
 
   return {
     valid: ctx.valid,
-    errors: ctx.errors
+    errors: ctx.errors,
+    getErrorInPath: ctx.getErrorInPath
   }
 }
 

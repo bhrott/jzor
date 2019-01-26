@@ -98,53 +98,50 @@ Get the result:
 {
   valid: false,
   errors: {
-    '$root.age': {
-      positive: {
-        message: 'The value should be a positive number',
-        value: -5
-      }
-    },
-    '$root.weapons': {
-      maxItems: {
-        message: 'This field should contain at maximun 2 item(s)',
-        maxItems: 2,
-        currentItems: 3,
-        value: [
-          {
-            title: 'Storm Breaker',
-            damage: 1000
-          },
-          1,
-          {
-            title: 'Mjolnir',
-            damage: -5
+    $root: {
+      age: {
+        positive: {
+          message: 'The value should be a positive number',
+          value: -5
+        }
+      },
+      weapons: {
+        $0: {
+          $root: {
+            damage: {
+              max: {
+                max: 999,
+                message: 'The value should be equal or less than 999',
+                value: 1000
+              }
+            }
           }
-        ]
-      }
-    },
-    '$root.weapons.0': {
-      '$root.damage': {
-        max: {
-          message: 'The value should be equal or less than 999',
-          value: 1000,
-          max: 999
-        }
-      }
-    },
-    '$root.weapons.1': {
-      $root: {
-        type: {
-          message: 'The value should be an object',
-          value: 1
-        }
-      }
-    },
-    '$root.weapons.2': {
-      '$root.damage': {
-        min: {
-          message: 'The value should be equal or greater than 0',
-          value: -5,
-          min: 0
+        },
+        $1: {
+          $root: {
+            type: { message: 'The value should be an object', value: 1 }
+          }
+        },
+        $2: {
+          $root: {
+            damage: {
+              min: {
+                message: 'The value should be equal or greater than 0',
+                min: 0,
+                value: -5
+              }
+            }
+          }
+        },
+        maxItems: {
+          currentItems: 3,
+          maxItems: 2,
+          message: 'This field should contain at maximun 2 item(s)',
+          value: [
+            { damage: 1000, title: 'Storm Breaker' },
+            1,
+            { damage: -5, title: 'Mjolnir' }
+          ]
         }
       }
     }
@@ -486,12 +483,65 @@ const result = validateSchema(schema, value)
 
 
 
+## Utilities
+
+### getErrorInPath
+
+Some times all the path for the error you are seeking could not be available. For example:
+
+Think about this error:
+
+```js
+$root: {
+  age: {
+    positive: {
+      message: 'The value should be a positive number',
+      value: -5
+    }
+  }
+}
+```
+
+You probably want to get the `$root.age.positive.message`. But if it's not validated yet or if the value is valid, this property will not exist and your **code will throw an error**.
+
+To prevent it, you can use the `getErrorInPath` helper. It will let you to pass the path of the error, if it exist, it will return the object inside the path, otherwise, will return `null`.
+
+```js
+const { validateSchema } = require('jzor')
+
+const schema = {
+  $type: 'array',
+  item: [
+    {
+      $type: 'object',
+      props: {
+        name: {
+          $type: 'string',
+          minLength: 5
+        }
+      }
+    }
+  ]
+}
+
+const value = [
+  {
+    name: 'Zyon'
+  }
+]
+
+const result = validateSchema(schema, value)
+
+const message = result.getErrorInPath('$root.$0.$root.name.minLength.message')
+
+// if the error exist, it will return the string 'The min length for this field is 5'
+// otherwise, it will return NULL
+```
+
 ## Etc...
 
 * [CHANGELOG](CHANGELOG.md)
 * [Advanced](docs/advanced.md)
-
-
 
 <div>Icons made by <a href="https://www.freepik.com/" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" 			    title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" 			    title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
 

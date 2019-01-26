@@ -9,10 +9,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Adding `or` validator
+- Adding `getErrorInPath` helper
 
 ### Fixed
 
 - Fixing translation in global validators
+
+### BREAKING CHANGES
+
+- The `errors` result changed to be easier to track and get by path.
 
 
 ## [1.2.0] - 2019-01-25

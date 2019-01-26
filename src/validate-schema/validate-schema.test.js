@@ -108,57 +108,52 @@ test('invalid schema should return errors', () => {
 
   const result = validateSchema(schema, value)
 
-  expect(result).toEqual({
-    valid: false,
-    errors: {
-      '$root.age': {
+  expect(result.valid).toBeFalsy()
+  expect(result.errors).toEqual({
+    $root: {
+      age: {
         positive: {
           message: 'The value should be a positive number',
           value: -5
         }
       },
-      '$root.weapons': {
-        maxItems: {
-          message: 'This field should contain at maximun 2 item(s)',
-          maxItems: 2,
-          currentItems: 3,
-          value: [
-            {
-              title: 'Storm Breaker',
-              damage: 1000
-            },
-            1,
-            {
-              title: 'Mjolnir',
-              damage: -5
+      weapons: {
+        $0: {
+          $root: {
+            damage: {
+              max: {
+                max: 999,
+                message: 'The value should be equal or less than 999',
+                value: 1000
+              }
             }
+          }
+        },
+        $1: {
+          $root: {
+            type: { message: 'The value should be an object', value: 1 }
+          }
+        },
+        $2: {
+          $root: {
+            damage: {
+              min: {
+                message: 'The value should be equal or greater than 0',
+                min: 0,
+                value: -5
+              }
+            }
+          }
+        },
+        maxItems: {
+          currentItems: 3,
+          maxItems: 2,
+          message: 'This field should contain at maximun 2 item(s)',
+          value: [
+            { damage: 1000, title: 'Storm Breaker' },
+            1,
+            { damage: -5, title: 'Mjolnir' }
           ]
-        }
-      },
-      '$root.weapons.0': {
-        '$root.damage': {
-          max: {
-            message: 'The value should be equal or less than 999',
-            value: 1000,
-            max: 999
-          }
-        }
-      },
-      '$root.weapons.1': {
-        $root: {
-          type: {
-            message: 'The value should be an object',
-            value: 1
-          }
-        }
-      },
-      '$root.weapons.2': {
-        '$root.damage': {
-          min: {
-            message: 'The value should be equal or greater than 0',
-            value: -5,
-            min: 0
-          }
         }
       }
     }
@@ -210,4 +205,34 @@ test('validating all schemas should be succeed', () => {
   const result = validateSchema(schema, value)
 
   expect(result.valid).toBeTruthy()
+})
+
+
+test('get error in path should return the error message', () => {
+  const schema = {
+    $type: 'array',
+    item: [
+      {
+        $type: 'object',
+        props: {
+          name: {
+            $type: 'string',
+            minLength: 5
+          }
+        }
+      }
+    ]
+  }
+
+  const value = [
+    {
+      name: 'Zyon'
+    }
+  ]
+
+  const result = validateSchema(schema, value)
+
+  const message = result.getErrorInPath('$root.$0.$root.name.minLength.message')
+
+  expect(message).toBe('The min length for this field is 5')
 })
