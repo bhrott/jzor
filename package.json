@@ -7,8 +7,8 @@
     "test": "jest --coverage",
     "lint": "eslint src/**",
     "validate": "npm run lint && npm test",
-    "task:generate-readme": "node tasks/generate-readme/generate-readme.js",
-    "build": "npm run task:generate-readme && npm run validate",
+    "task:generate-docs": "node tasks/generate-docs/generate-docs.js",
+    "build": "npm run task:generate-docs && npm run validate",
     "prepublish": "npm run build"
   },
   "repository": {
