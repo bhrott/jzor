@@ -21,8 +21,7 @@ const createModelDescription = dict => {
       if (typeof val === 'object') {
         description.push(`${getIdentationChars()}${key}:\n`)
         iterate(val)
-      }
-      else {
+      } else {
         description.push(`${getIdentationChars()}${key} -> ${typeof val}\n`)
       }
     })
@@ -35,8 +34,11 @@ const createModelDescription = dict => {
 }
 
 test('pt-br should have the same model as en-us', () => {
-  const enUSModel = createModelDescription(dictionaries.enUS)
-  const ptBRModel = createModelDescription(dictionaries.ptBR)
+  const baseModel = createModelDescription(dictionaries['en-us'])
 
-  expect(ptBRModel).toEqual(enUSModel)
+  Object.keys(dictionaries).forEach(key => {
+    let model = createModelDescription(dictionaries[key])
+
+    expect(model).toEqual(baseModel)
+  })
 })

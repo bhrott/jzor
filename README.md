@@ -153,7 +153,7 @@ Get the result:
 
 - [Validators](docs/validators.md)
 - [Utilities](docs/utilities.md)
-
+- [Internationalization](docs/internationalization.md)
 
 ## Etc...
 
