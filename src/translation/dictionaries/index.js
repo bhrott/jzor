@@ -1,4 +1,4 @@
 module.exports = {
-  enUS: require('./en-us'),
-  ptBR: require('./pt-br')
+  enUS: require('./en-us.translation'),
+  ptBR: require('./pt-br.translation')
 }

@@ -50,6 +50,11 @@ const enUS = {
         value: 'This value is not allowed'
       }
     },
+    or: {
+      errors: {
+        schema: 'No schema matched with the value'
+      }
+    },
     string: {
       errors: {
         type: 'The value should be a string',

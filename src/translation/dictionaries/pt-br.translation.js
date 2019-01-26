@@ -50,6 +50,11 @@ const ptBR = {
         value: 'Este valor não é permitido'
       }
     },
+    or: {
+      errors: {
+        schema: 'Este valor não é compatível com nenhum modelo'
+      }
+    },
     string: {
       errors: {
         type: 'O valor deve ser do tipo string',

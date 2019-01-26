@@ -8,6 +8,10 @@ function getValidators() {
   return validators
 }
 
+function getValidator($type) {
+  return validators[$type]
+}
+
 ([
   require('./string'),
   require('./object'),
@@ -23,5 +27,6 @@ function getValidators() {
 
 module.exports = {
   registerValidator,
-  getValidators
+  getValidators,
+  getValidator
 }
