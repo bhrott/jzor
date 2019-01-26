@@ -1,4 +1,5 @@
 const _ = require('lodash')
+const { getCurrentTranslation } = require('../../translation')
 
 function createContext({ schema, value }) {
   let ctx = {}
@@ -32,7 +33,7 @@ function createContext({ schema, value }) {
       if (valueIsRejected) {
         ctx.registerErrors({
           reject: {
-            message: 'This value is not allowed',
+            message: getCurrentTranslation().validators.global.errors.reject,
             value: ctx.value
           }
         })

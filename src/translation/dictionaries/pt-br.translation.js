@@ -1,6 +1,11 @@
 const ptBR = {
   key: 'pt-br',
   validators: {
+    global: {
+      errors: {
+        reject: 'This value is not allowed'
+      }
+    },
     array: {
       errors: {
         type: 'O valor deve ser do tipo array',
@@ -43,6 +48,11 @@ const ptBR = {
     oneOf: {
       errors: {
         value: 'Este valor não é permitido'
+      }
+    },
+    or: {
+      errors: {
+        schema: 'Este valor não é compatível com nenhum modelo'
       }
     },
     string: {

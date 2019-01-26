@@ -1,6 +1,11 @@
 const enUS = {
   key: 'en-us',
   validators: {
+    global: {
+      errors: {
+        reject: 'This value is not allowed'
+      }
+    },
     array: {
       errors: {
         type: 'The value should be an array',
@@ -43,6 +48,11 @@ const enUS = {
     oneOf: {
       errors: {
         value: 'This value is not allowed'
+      }
+    },
+    or: {
+      errors: {
+        schema: 'No schema matched with the value'
       }
     },
     string: {
