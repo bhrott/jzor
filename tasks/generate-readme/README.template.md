@@ -154,6 +154,11 @@ Get the result:
 
 ## Validators
 
+- [Global](#global-applied-to-all-validators)
+  - [allow](#allow)
+  - [reject](#reject)
+{{validators-index}}
+
 ### Global (applied to all validators)
 
 You can use the following parameters in all validators:

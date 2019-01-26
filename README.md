@@ -154,6 +154,36 @@ Get the result:
 
 ## Validators
 
+- [Global](#global-applied-to-all-validators)
+  - [allow](#allow)
+  - [reject](#reject)
+- [Array](#array)
+  * [Usage](#usage)
+  * [Parameters](#parameters)
+- [Boolean](#boolean)
+  * [Usage](#usage-1)
+- [Date](#date)
+  * [Usage](#usage-2)
+  * [Parameters](#parameters-1)
+- [Email](#email)
+  * [Usage](#usage-3)
+  * [Parameters](#parameters-2)
+- [Number](#number)
+  * [Usage](#usage-4)
+  * [Parameters](#parameters-3)
+- [Object](#object)
+  * [Usage](#usage-5)
+  * [Parameters](#parameters-4)
+- [One Of](#one-of)
+  * [Usage](#usage-6)
+  * [Parameters](#parameters-5)
+- [Or](#or)
+  * [Usage](#usage-7)
+  * [Parameters](#parameters-6)
+- [String](#string)
+  * [Usage](#usage-8)
+  * [Parameters](#parameters-7)
+
 ### Global (applied to all validators)
 
 You can use the following parameters in all validators:

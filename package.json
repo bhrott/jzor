@@ -15,7 +15,12 @@
     "type": "git",
     "url": "git+https://github.com/benhurott/jzor.git"
   },
-  "keywords": ["json", "schema", "validator", "errors"],
+  "keywords": [
+    "json",
+    "schema",
+    "validator",
+    "errors"
+  ],
   "author": "Ben-hur Santos Ott",
   "license": "ISC",
   "bugs": {
@@ -27,7 +32,8 @@
     "jest": "^23.6.0"
   },
   "dependencies": {
-    "lodash": "^4.17.11"
+    "lodash": "^4.17.11",
+    "markdown-toc": "^1.2.0"
   },
   "jest": {}
 }

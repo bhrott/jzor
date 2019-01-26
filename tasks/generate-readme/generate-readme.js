@@ -1,5 +1,6 @@
 const fs = require('fs')
 const path = require('path')
+const toc = require('markdown-toc')
 const utils = require('../utils')
 
 const validatorsFolderPath = path.resolve(__dirname, '../../src/validators')
@@ -16,7 +17,11 @@ for (let mdPath of mardownFiles) {
 const templatePath = path.resolve(__dirname, 'README.template.md')
 let template = fs.readFileSync(templatePath).toString()
 
-template = template.replace('{{validators}}', content)
+const validatorsIndex = toc(content).content
+
+template = template
+  .replace('{{validators}}', content)
+  .replace('{{validators-index}}', validatorsIndex)
 
 const readmePath = path.resolve(__dirname, '../../README.md')
 
