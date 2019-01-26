@@ -37,9 +37,7 @@ test('invalid min items should return an error', () => {
     schema: {
       $type: 'array',
       minItems: 1,
-      item: [
-        { $type: 'string' }
-      ]
+      item: [{ $type: 'string' }]
     },
     value: []
   })
@@ -63,11 +61,9 @@ test('invalid max items should return an error', () => {
     schema: {
       $type: 'array',
       maxItems: 1,
-      item: [
-        { $type: 'string' }
-      ]
+      item: [{ $type: 'string' }]
     },
-    value: [ 'a', 'b' ]
+    value: ['a', 'b']
   })
 
   validator.validate(ctx)
@@ -78,7 +74,7 @@ test('invalid max items should return an error', () => {
         message: 'This field should contain at maximun 1 item(s)',
         maxItems: 1,
         currentItems: 2,
-        value: [ 'a', 'b' ]
+        value: ['a', 'b']
       }
     }
   })
@@ -94,18 +90,15 @@ test('invalid item definition should return an error', () => {
         }
       ]
     },
-    value: [ 'sword', 2 ]
+    value: ['sword', 2]
   })
 
   validator.validate(ctx)
 
   expect(ctx.errors).toEqual({
-    '$root.1': {
-      $root: {
-        type: {
-          message: 'The value should be a string',
-          value: 2
-        }
+    $root: {
+      $1: {
+        $root: { type: { message: 'The value should be a string', value: 2 } }
       }
     }
   })
@@ -125,7 +118,7 @@ test('valid second item definition should be valid', () => {
         }
       ]
     },
-    value: [ 'sword', 'sword' ]
+    value: ['sword', 'sword']
   })
 
   validator.validate(ctx)
@@ -142,7 +135,7 @@ test('failed object prop inside the array should return an error', () => {
           $type: 'object',
           props: {
             name: {
-              $type: 'string',
+              $type: 'string'
             },
             weapons: {
               $type: 'array',
@@ -175,16 +168,21 @@ test('failed object prop inside the array should return an error', () => {
 
   validator.validate(ctx)
 
-  expect(ctx.errors).toEqual({ 
-    '$root.0': { 
-      '$root.weapons.0': { 
-        '$root.title': { 
-          'type': { 
-            'message': 'The value should be a string', 
-            'value': null 
-          } 
-        } 
-      } 
-    } 
+  expect(ctx.errors).toEqual({
+    $root: {
+      $0: {
+        $root: {
+          weapons: {
+            $0: {
+              $root: {
+                title: {
+                  type: { message: 'The value should be a string', value: null }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
   })
 })

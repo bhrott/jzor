@@ -11,8 +11,19 @@ function createContext({ schema, value }) {
   ctx.errors = {}
   ctx.valid = true
   ctx.registerErrors = errors => {
-    const path = ctx.path.join('.')
-    ctx.errors[path] = errors
+    ctx.path.reduce((acc, cur, index) => {
+      const key = `${cur}`
+      if (acc[key] === undefined) {
+        acc[key] = {}
+      }
+
+      if (index === ctx.path.length - 1) { //last
+        acc[key] = errors
+      }
+
+      return acc[key]
+    }, ctx.errors)
+
     ctx.valid = false
   }
   
@@ -54,6 +65,19 @@ function createContext({ schema, value }) {
     return {
       handled: allowedValues || rejectedValues
     }
+  }
+
+  ctx.getErrorInPath = path => {
+    const error = _.get(ctx.errors, path, null)
+    return error
+  }
+
+  ctx.validate = () => {
+    const { getValidator } = require('../../validators')
+
+    const handler = getValidator(ctx.schema.$type)
+
+    handler.validate(ctx)
   }
 
   return ctx

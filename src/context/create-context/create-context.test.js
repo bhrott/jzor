@@ -49,8 +49,10 @@ test('register errors must set the path and set valid as false', () => {
 
   expect(ctx.valid).toBeFalsy()
   expect(ctx.errors).toEqual({
-    '$root.test': {
-      test: true
+    $root: {
+      test: {
+        test: true
+      }
     }
   })
 })
@@ -138,4 +140,36 @@ test('handle pre validation with rejected should return handled=true', () => {
   const result = ctx.handlePreValidation()
 
   expect(result).toEqual({ handled: true })
+})
+
+test('get error in path should return error if exist', () => {
+  let ctx = createContext({
+    schema: {
+      $type: 'object',
+      props: {
+        role: {
+          $type: 'object',
+          props: {
+            title: {
+              $type: 'string'
+            }
+          }
+        }
+      }
+    },
+    value: {
+      role: {
+        title: null
+      }
+    }
+  })
+
+  ctx.validate()
+
+  const error = ctx.getErrorInPath('$root.role.title.type')
+
+  expect(error).toEqual({
+    message: 'The value should be a string',
+    value: null
+  })
 })

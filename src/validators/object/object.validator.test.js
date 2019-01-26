@@ -51,12 +51,14 @@ test('invalid prop value should return an error', () => {
   validator.validate(ctx)
 
   expect(ctx.errors).toEqual({
-    '$root.name': {
-      maxLength: {
-        message: 'The max length for this field is 5',
-        maxLength: 5,
-        currentLength: 8,
-        value: 'Chapolin'
+    $root: {
+      name: {
+        maxLength: {
+          message: 'The max length for this field is 5',
+          maxLength: 5,
+          currentLength: 8,
+          value: 'Chapolin'
+        }
       }
     }
   })
@@ -92,21 +94,25 @@ test('nested invalid prop should return errors', () => {
 
   validator.validate(ctx)
 
-  expect(ctx.errors).toEqual({ 
-    '$root.name': {
-      maxLength: {
-        message: 'The max length for this field is 5',
-        maxLength: 5,
-        currentLength: 8,
-        value: 'Chapolin'
-      }
-    },
-    '$root.weapon.title': {
-      minLength: {
-        message: 'The min length for this field is 10',
-        minLength: 10,
-        currentLength: 6,
-        value: 'Hammer'
+  expect(ctx.errors).toEqual({
+    $root: {
+      name: {
+        maxLength: {
+          currentLength: 8,
+          maxLength: 5,
+          message: 'The max length for this field is 5',
+          value: 'Chapolin'
+        }
+      },
+      weapon: {
+        title: {
+          minLength: {
+            currentLength: 6,
+            message: 'The min length for this field is 10',
+            minLength: 10,
+            value: 'Hammer'
+          }
+        }
       }
     }
   })
