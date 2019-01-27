@@ -6,6 +6,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.5.0] - 2019-01-27
+
+### Added
+
+- Adding `custom` validator
+- Adding docs for "Creating your validator".
+
+### Fixed
+
+- Linking the `or` validator
+
 ## [1.4.1] - 2019-01-26
 
 ### Added

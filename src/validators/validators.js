@@ -13,14 +13,16 @@ function getValidator($type) {
 }
 
 ([
-  require('./string'),
-  require('./object'),
   require('./array'),
-  require('./number'),
   require('./boolean'),
-  require('./oneOf'),
+  require('./custom'),
   require('./date'),
-  require('./email')
+  require('./email'),
+  require('./number'),
+  require('./object'),
+  require('./oneOf'),
+  require('./or'),
+  require('./string')
 ].forEach(validator => {
   registerValidator(validator)
 }))
