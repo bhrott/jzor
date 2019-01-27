@@ -28,7 +28,7 @@ const translation = {
 const options = {
   // this prop is used to provide default values if some key is missing
   // in the dictionary you provided.
-  // For example, if the key 'validators.globa.errors.reject' does not exist in your dictionary, it will use
+  // For example, if the key 'validators.global.errors.reject' does not exist in your dictionary, it will use
   // the value from 'en-us' dictionary instead.
   // The default value for this prop is 'en-us'
   basedOn: 'en-us'
