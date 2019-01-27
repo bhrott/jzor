@@ -8,27 +8,30 @@
   * [Parameters](#parameters)
 - [Boolean](#boolean)
   * [Usage](#usage-1)
-- [Date](#date)
+- [Custom](#custom)
   * [Usage](#usage-2)
   * [Parameters](#parameters-1)
-- [Email](#email)
+- [Date](#date)
   * [Usage](#usage-3)
   * [Parameters](#parameters-2)
-- [Number](#number)
+- [Email](#email)
   * [Usage](#usage-4)
   * [Parameters](#parameters-3)
-- [Object](#object)
+- [Number](#number)
   * [Usage](#usage-5)
   * [Parameters](#parameters-4)
-- [One Of](#one-of)
+- [Object](#object)
   * [Usage](#usage-6)
   * [Parameters](#parameters-5)
-- [Or](#or)
+- [One Of](#one-of)
   * [Usage](#usage-7)
   * [Parameters](#parameters-6)
-- [String](#string)
+- [Or](#or)
   * [Usage](#usage-8)
   * [Parameters](#parameters-7)
+- [String](#string)
+  * [Usage](#usage-9)
+  * [Parameters](#parameters-8)
 
 ### Global (applied to all validators)
 
@@ -114,6 +117,43 @@ const value = true
 
 const result = validateSchema(schema, value)
 ```
+
+
+### Custom
+
+The `custom` validator allow you to create a custom validation function for your value.
+
+It's commonly used for complex value validation. 
+
+#### Usage
+
+```js
+const { validateSchema } = require('jzor')
+
+const schema = {
+  $type: 'custom',
+  validation: value => {
+    
+    return {
+      // the 'valid' prop indicate if the validation succeed or not.
+      valid: false, 
+
+      // if the valid=false, the message for the error.
+      message: 'The error message'
+    }
+  }
+}
+
+const value = 'batman@thenight.com'
+
+const result = validateSchema(schema, value)
+```
+
+#### Parameters
+
+| parameter | type | required | default | description |
+| --------- | ---- | -------- | ------- | ----------- |
+| validation | function | yes | | The function containing the validation for the value. The result of the function must be an object with the props `valid (bool)` and `message (string)`. |
 
 
 ### Date

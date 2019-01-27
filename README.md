@@ -153,6 +153,7 @@ Get the result:
 - [Validators](docs/validators.md)
 - [Utilities](docs/utilities.md)
 - [Internationalization](docs/internationalization.md)
+- [Creating your validator](docs/creating-your-validator.md)
 
 ## Etc...
 
@@ -164,5 +165,4 @@ Get the result:
 ## TODO
 
 * [ ] - Create docs for "Contribution"
-* [ ] - Create docs for "Registering a new validator"
-* [ ] - Create docs for "Registering a new translation"
+* [ ] - Create sample video for "Registering a new validator"
