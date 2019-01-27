@@ -1,14 +1,14 @@
 {
   "name": "jzor",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "JSON Schema Validator that let you know whata hell is happening!",
   "main": "index.js",
   "scripts": {
     "test": "jest --coverage",
     "lint": "eslint src/**",
     "validate": "npm run lint && npm test",
-    "task:generate-readme": "node tasks/generate-readme/generate-readme.js",
-    "build": "npm run task:generate-readme && npm run validate",
+    "task:generate-docs": "node tasks/generate-docs/generate-docs.js",
+    "build": "npm run task:generate-docs && npm run validate",
     "prepublish": "npm run build"
   },
   "repository": {
