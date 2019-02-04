@@ -35,14 +35,52 @@ const allowMiddleware = {
   // validation and must return an object with a property "handled".
   // The property "handled" indicates if it needs to continue the
   // validation or not.
-  // handled: true => stop, it's handled
-  // handled: false => continue to the next middleware
+  
   validate: ctx => {
-    // your validation....
+    // the ctx.value prop contain the value to be validated.
+    // in this sample, the ctx.value is: "null"
+    const value = ctx.value
+
+    // the ctx.schema contains the schema for your value.
+    // in this sample, the ctx.schema is:
+    // {
+    //   $type: 'string',
+    //   allow: [null]
+    // }
+    const schema = ctx.schema
+
+    // with this data, you can create all rules you want.
+    // but now you need to know how to set the result.
+
+    // the possible results is: valid or invalid
+    // to resolve the validation as VALID, you don't need to anything.
+
+    // to resolve the validation as INVALID, you need to use the
+    // "registerErrors" helper from ctx.
+
+    // the registerErrors require 1 argument, an object.
+    // inside this object, you can put anything you want.
+    // it will be registered as errors inside the current path.
+    ctx.registerErrors({
+      foo: {
+        message: 'my message here',
+        value
+      }
+    })
 
     return {
+      // handled: true => stop, it's handled
+      // handled: false => continue to the next middleware
       handled: true
     }
   }
 }
+```
+
+After this, you can register your middleware:
+
+```js
+const { registerMiddleware } = require('jzor')
+
+registerMiddleware(allowMiddleware)
 ```
