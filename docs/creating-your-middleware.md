@@ -1,4 +1,4 @@
-## Creating your validator
+## Creating your middleware
 
 JZOR is extensible. You can create and register your own middleware.
 
