@@ -4,8 +4,6 @@ const { getCurrentTranslation } = require('../../translation')
 const objectValidator = {
   $type: 'object',
   validate: ctx => {
-    if (ctx.handlePreValidation().handled) return
-    
     if (!_.isObject(ctx.value)) {
       ctx.registerErrors({
         type: {

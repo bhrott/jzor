@@ -5,8 +5,6 @@ const { getCurrentTranslation } = require('../../translation')
 const arrayValidator = {
   $type: 'array',
   validate: ctx => {
-    if (ctx.handlePreValidation().handled) return
-    
     const translation = getCurrentTranslation()
 
     // validate type

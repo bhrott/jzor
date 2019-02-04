@@ -1,7 +1,32 @@
+const { getMiddlewares } = require('../middlewares')
+
 let validators = []
 
 function registerValidator(validator) {
-  validators[validator.$type] = validator
+  const allMiddlewares = getMiddlewares()
+  const preMiddlewares = allMiddlewares.filter(m => m.pre)
+  const postMiddlewares = allMiddlewares.filter(m => m.post)
+  
+  const validatorWithMiddlewares = {
+    ...validator,
+    validate: ctx => {
+      for (let pre of preMiddlewares) {
+        if (pre.validate(ctx).handled) {
+          return
+        }
+      }
+
+      validator.validate(ctx)
+
+      for (let post of postMiddlewares) {
+        if (post.validate(ctx).handled) {
+          return
+        }
+      }
+    }
+  }
+
+  validators[validator.$type] = validatorWithMiddlewares
 }
 
 function getValidators() {

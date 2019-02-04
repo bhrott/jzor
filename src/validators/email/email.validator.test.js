@@ -1,19 +1,6 @@
 const { createContext } = require('../../context')
 const validator = require('./email.validator')
 
-test('allow null should return no errors', () => {
-  const ctx = createContext({
-    schema: {
-      allow: [null]
-    },
-    value: null
-  })
-
-  validator.validate(ctx)
-
-  expect(ctx.valid).toBeTruthy()
-})
-
 test('non-string value should return error', () => {
   const ctx = createContext({
     schema: {

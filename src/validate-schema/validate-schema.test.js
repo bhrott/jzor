@@ -185,6 +185,21 @@ test('validating all schemas should be succeed', () => {
           },
           active: {
             $type: 'boolean'
+          },
+          perks: {
+            $type: 'or',
+            schemas: [
+              {
+                $type: 'array',
+                item: {
+                  $type: 'string'
+                }
+              },
+              {
+                $type: 'string',
+                allow: [null]
+              }
+            ]
           }
         }
       }
@@ -198,7 +213,17 @@ test('validating all schemas should be succeed', () => {
       level: 5,
       birthDate: new Date(),
       role: 'warrior',
-      active: true
+      active: true,
+      perks: ['defense-monster']
+    },
+    {
+      name: 'Alaban',
+      email: 'alaban@mid.com',
+      level: 12,
+      birthDate: new Date(),
+      role: 'warrior',
+      active: true,
+      perks: null
     }
   ]
 

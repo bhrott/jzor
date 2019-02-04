@@ -13,8 +13,6 @@ function validateEmail(email) {
 const emailValidator = {
   $type: 'email',
   validate: ctx => {
-    if (ctx.handlePreValidation().handled) return
-
     if (!_.isString(ctx.value)) {
       ctx.registerErrors({
         type: {
