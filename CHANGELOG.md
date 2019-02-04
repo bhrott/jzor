@@ -6,6 +6,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.6.0] - 2019-02-04
+
+### Added
+
+- Adding `middlewares`
+
+### Changed
+
+- (*BREAKING CHANGE*) Now the `allow` and `reject` hooks are middlewares and runs automatically, not need to handle inside the custom validator.
+  - The functions `ctx.handleAllowedValues`, `ctx.handleRejectedValues` and `ctx.handlePreValidation` were removed and will no longer works.
+
 ## [1.5.0] - 2019-01-27
 
 ### Added

@@ -121,28 +121,3 @@ For this sample, the result will be:
   }
 }
 ```
-
-### Handling global hooks
-
-If you check the [global hooks](https://github.com/benhurott/jzor/blob/master/docs/validators.md#global-applied-to-all-validators) for validators, we have the `allow`, `reject`, etc.
-
-Ok, but how to include this functionality in your validator?
-
-No, it's not automatically because you can create your validation without those helpers. But stay calm, it's simple:
-
-```js
-const urlValidator = {
-  $type: 'url',
-  validate: ctx => {
-    // to run all the global pre-validation rules,
-    // just call the ctx.handlePreValidation()
-    // if the value of "handled" is true, just skip
-    // your validation.
-    if (ctx.handlePreValidation().handled) return
-
-    // you can check it separatelly if you want:
-    if (ctx.handleAllowedValues().handled) return
-    if (ctx.handleRejectedValues().handled) return
-  }
-}
-```

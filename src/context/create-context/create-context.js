@@ -1,5 +1,4 @@
 const _ = require('lodash')
-const { getCurrentTranslation } = require('../../translation')
 
 function createContext({ schema, value }) {
   let ctx = {}
@@ -27,46 +26,6 @@ function createContext({ schema, value }) {
     ctx.valid = false
   }
   
-  ctx.handleAllowedValues = () => {
-    if (_.isArray(ctx.schema.allow) && ctx.schema.allow.length > 0) {
-      return {
-        handled: ctx.schema.allow.indexOf(ctx.value) >= 0
-      }
-    }
-
-    return { handled: false }
-  }
-
-  ctx.handleRejectedValues = () => {
-    if (_.isArray(ctx.schema.reject) && ctx.schema.reject.length > 0) {
-      const valueIsRejected = ctx.schema.reject.indexOf(ctx.value) >= 0
-
-      if (valueIsRejected) {
-        ctx.registerErrors({
-          reject: {
-            message: getCurrentTranslation().validators.global.errors.reject,
-            value: ctx.value
-          }
-        })
-      }
-
-      return {
-        handled: valueIsRejected
-      }
-    }
-
-    return { handled: false }
-  }
-
-  ctx.handlePreValidation = () => {
-    const allowedValues = ctx.handleAllowedValues().handled
-    const rejectedValues = ctx.handleRejectedValues().handled
-
-    return {
-      handled: allowedValues || rejectedValues
-    }
-  }
-
   ctx.getErrorInPath = path => {
     const error = _.get(ctx.errors, path, null)
     return error

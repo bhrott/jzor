@@ -36,5 +36,11 @@
   "dependencies": {
     "lodash": "^4.17.11"
   },
-  "jest": {}
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx}",
+      "!<rootDir>/src/translation/dictionaries/pt-br.translation.js",
+      "!src/**/index.js"
+    ]
+  }
 }

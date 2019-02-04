@@ -4,8 +4,6 @@ const { getCurrentTranslation } = require('../../translation')
 const numberValidator = {
   $type: 'number',
   validate: ctx => {
-    if (ctx.handlePreValidation().handled) return
-
     const translation = getCurrentTranslation()
 
     if (!_.isNumber(ctx.value)) {

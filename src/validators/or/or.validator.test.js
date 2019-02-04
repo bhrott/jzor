@@ -1,19 +1,6 @@
 const validator = require('./or.validator')
 const { createContext } = require('../../context')
 
-test('allow null should return no errors', () => {
-  const ctx = createContext({
-    schema: {
-      allow: [null]
-    },
-    value: null
-  })
-
-  validator.validate(ctx)
-
-  expect(ctx.valid).toBeTruthy()
-})
-
 test('valid schema should return no errors', () => {
   const ctx = createContext({
     schema: {

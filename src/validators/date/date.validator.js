@@ -6,8 +6,6 @@ const convertValue = value => value
 const dateValidator = {
   $type: 'date',
   validate: ctx => {
-    if (ctx.handlePreValidation().handled) return
-
     const value = (ctx.schema.convertValue || convertValue)(ctx.value)
     const translation = getCurrentTranslation()
 

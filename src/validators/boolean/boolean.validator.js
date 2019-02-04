@@ -4,8 +4,6 @@ const { getCurrentTranslation } = require('../../translation')
 const booleanValidator = {
   $type: 'boolean',
   validate: ctx => {
-    if (ctx.handlePreValidation().handled) return
-
     if (!_.isBoolean(ctx.value)) {
       ctx.registerErrors({
         type: {

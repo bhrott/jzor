@@ -151,9 +151,11 @@ Get the result:
 ## Docs
 
 - [Validators](docs/validators.md)
+- [Middlewares](docs/middlewares.md)
 - [Utilities](docs/utilities.md)
 - [Internationalization](docs/internationalization.md)
 - [Creating your validator](docs/creating-your-validator.md)
+- [Creating your middleware](docs/creating-your-middleware.md)
 
 ## Etc...
 

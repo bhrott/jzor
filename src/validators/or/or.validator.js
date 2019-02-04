@@ -4,8 +4,6 @@ const { getCurrentTranslation } = require('../../translation')
 const orValidator = {
   $type: 'or',
   validate: ctx => {
-    if (ctx.handlePreValidation().handled) return
-
     const { getValidator } = require('../validators')
 
     let validationResult = []
