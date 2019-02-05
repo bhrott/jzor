@@ -55,6 +55,17 @@ const enUS = {
         schema: 'No schema matched with the value'
       }
     },
+    password: {
+      errors: {
+        type: 'The value should be a string',
+        minLength: ctx => `Minimun ${ctx.schema.minLength} characters`,
+        maxLength: ctx => `Maximun ${ctx.schema.maxLength} characters`,
+        letters: 'Contains letters (a-z)',
+        capitalLetters: 'Contains capital letters (A-Z)',
+        numbers: 'Contains numbers',
+        specialCharacters: 'Contains special characters (@#$%^&*)(+=._-)'
+      }
+    },
     string: {
       errors: {
         type: 'The value should be a string',

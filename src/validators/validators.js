@@ -47,6 +47,7 @@ function getValidator($type) {
   require('./object'),
   require('./oneOf'),
   require('./or'),
+  require('./password'),
   require('./string')
 ].forEach(validator => {
   registerValidator(validator)
