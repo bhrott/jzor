@@ -73,6 +73,12 @@ const ptBR = {
         maxLength: ctx => `O tamanho máximo para este campo é ${ctx.schema.maxLength}`,
         regex: 'O valor não é válido para a expressão regular fornecida'
       }
+    },
+    url: {
+      errors: {
+        type: 'O valor deve ser do tipo string',
+        url: 'O valor não é uma url válida'
+      }
     }
   }
 }

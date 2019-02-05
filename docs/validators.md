@@ -26,9 +26,15 @@
 - [Or](#or)
   * [Usage](#usage-8)
   * [Parameters](#parameters-7)
-- [String](#string)
+- [Password](#password)
   * [Usage](#usage-9)
   * [Parameters](#parameters-8)
+- [String](#string)
+  * [Usage](#usage-10)
+  * [Parameters](#parameters-9)
+- [Url](#url)
+  * [Usage](#usage-11)
+  * [Parameters](#parameters-10)
 
 ### Array
 
@@ -304,6 +310,42 @@ const result = validateSchema(schema, valueAsNumber) // valid
 | schemas | array of schemas | yes | | the schemas that will be used to validate the value |
 
 
+### Password
+
+Use this validator to validate string passwords.
+
+#### Usage
+
+```js
+const { validateSchema } = require('jzor')
+
+const schema = {
+  $type: 'password',
+  minLength: 10,
+  maxLength: 20,
+  letters: true,
+  capitalLetters: true,
+  numbers: true,
+  specialCharacters: true
+}
+
+const value = 'Th*rWi1llDi3'
+
+const result = validateSchema(schema, value)
+```
+
+#### Parameters
+
+| parameter | type | required | default | description |
+| --------- | ---- | -------- | ------- | ----------- |
+| minLength | number | no | | validate the min length of the password |
+| maxLength | number | no | | validate the max length of the password |
+| letters | boolean | no | | validate if the password contains letters (`a-z`) |
+| capitalLetters | boolean | no | | validate if the password contain capital letters (`A-Z`) |
+| numbers | boolean | no | | validate if the password contain numbers (`0-9`) |
+| specialCharacters | boolean | no | | validate if the password contain special characters (`@#$%^&*)(+=._-`) |
+
+
 ### String
 
 #### Usage
@@ -330,5 +372,31 @@ const result = validateSchema(schema, value)
 | minLength | number | no | | validate the min length of the string |
 | maxLength | number | no | | validate the max length of the string |
 | regex | regex | no | | validate if the string match the regex rules |
+
+
+### Url
+
+Use this validator to validate url address.
+
+#### Usage
+
+```js
+const { validateSchema } = require('jzor')
+
+const schema = {
+  $type: 'url',
+  allowedProtocols: ['https']
+}
+
+const value = 'https://github.com/benhurott/jzor'
+
+const result = validateSchema(schema, value)
+```
+
+#### Parameters
+
+| parameter | type | required | default | description |
+| --------- | ---- | -------- | ------- | ----------- |
+| allowedProtocols | array of string | no | `['http', 'https', 'ftp']` | the protocols considered valid for the url |
 
 

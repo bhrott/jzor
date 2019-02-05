@@ -1,6 +1,6 @@
 const { getMiddlewares } = require('../middlewares')
 
-let validators = []
+let validators = {}
 
 function registerValidator(validator) {
   const allMiddlewares = getMiddlewares()
@@ -29,6 +29,10 @@ function registerValidator(validator) {
   validators[validator.$type] = validatorWithMiddlewares
 }
 
+function unregisterValidator($type) {
+  delete validators[$type]
+}
+
 function getValidators() {
   return validators
 }
@@ -48,7 +52,8 @@ function getValidator($type) {
   require('./oneOf'),
   require('./or'),
   require('./password'),
-  require('./string')
+  require('./string'),
+  require('./url')
 ].forEach(validator => {
   registerValidator(validator)
 }))
@@ -56,5 +61,6 @@ function getValidator($type) {
 module.exports = {
   registerValidator,
   getValidators,
-  getValidator
+  getValidator,
+  unregisterValidator
 }

@@ -73,6 +73,12 @@ const enUS = {
         maxLength: ctx => `The max length for this field is ${ctx.schema.maxLength}`,
         regex: 'The value do not match the rules.'
       }
+    },
+    url: {
+      errors: {
+        type: 'The value should be a string',
+        url: 'The value is not a valid url'
+      }
     }
   }
 }
