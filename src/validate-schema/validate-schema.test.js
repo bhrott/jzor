@@ -200,6 +200,13 @@ test('validating all schemas should be succeed', () => {
                 allow: [null]
               }
             ]
+          },
+          password: {
+            $type: 'password',
+            minLength: 6,
+            maxLength: 20,
+            letters: true,
+            numbers: true
           }
         }
       }
@@ -214,7 +221,8 @@ test('validating all schemas should be succeed', () => {
       birthDate: new Date(),
       role: 'warrior',
       active: true,
-      perks: ['defense-monster']
+      perks: ['defense-monster'],
+      password: 'ImTh3Best'
     },
     {
       name: 'Alaban',
@@ -223,7 +231,8 @@ test('validating all schemas should be succeed', () => {
       birthDate: new Date(),
       role: 'warrior',
       active: true,
-      perks: null
+      perks: null,
+      password: 'N0_ImTh3Best'
     }
   ]
 

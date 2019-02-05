@@ -55,12 +55,29 @@ const enUS = {
         schema: 'No schema matched with the value'
       }
     },
+    password: {
+      errors: {
+        type: 'The value should be a string',
+        minLength: ctx => `Minimun ${ctx.schema.minLength} characters`,
+        maxLength: ctx => `Maximun ${ctx.schema.maxLength} characters`,
+        letters: 'Contains letters (a-z)',
+        capitalLetters: 'Contains capital letters (A-Z)',
+        numbers: 'Contains numbers',
+        specialCharacters: 'Contains special characters (@#$%^&*)(+=._-)'
+      }
+    },
     string: {
       errors: {
         type: 'The value should be a string',
         minLength: ctx => `The min length for this field is ${ctx.schema.minLength}`,
         maxLength: ctx => `The max length for this field is ${ctx.schema.maxLength}`,
         regex: 'The value do not match the rules.'
+      }
+    },
+    url: {
+      errors: {
+        type: 'The value should be a string',
+        url: 'The value is not a valid url'
       }
     }
   }

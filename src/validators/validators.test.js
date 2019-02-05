@@ -1,5 +1,8 @@
+const { readdirSync, statSync } = require('fs')
+const path = require('path')
+
 const { createContext } = require('../context')
-const { registerValidator, getValidator } = require('./validators')
+const { registerValidator, unregisterValidator, getValidator, getValidators } = require('./validators')
 const { registerMiddleware } = require('../middlewares')
 
 test('register a validator with pre validator middleware should not trigger validator', () => {
@@ -71,4 +74,18 @@ test('register a validator with post middleware should call validate', () => {
 
   expect(validatorDef.validate.mock.calls.length).toBe(1)
   expect(middleware.validate.mock.calls.length).toBe(1)
+
+  unregisterValidator('foo')
+})
+
+test('all validators are linked', () => {
+  const currentDir = path.resolve(__dirname)
+
+  const dirs = readdirSync(currentDir).filter(f => statSync(path.join(currentDir, f)).isDirectory())
+
+  const validators = getValidators()
+
+  const validatorsKeys = Object.keys(validators)
+
+  expect(dirs).toEqual(validatorsKeys)
 })
