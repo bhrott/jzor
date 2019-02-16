@@ -104,3 +104,155 @@ test('nested invalid prop should return errors', () => {
     }
   })
 })
+
+test('extra props with strict should return error', () => {
+  const ctx = createContext({
+    value: {
+      name: 'Chapolin',
+      weapon: {
+        title: 'Hammer'
+      }
+    },
+    schema: {
+      $type: 'object',
+      props: {
+        name: {
+          $type: 'string'
+        }
+      },
+      strict: true
+    }
+  })
+
+  validator.validate(ctx)
+
+  expect(ctx.errors).toEqual({
+    $root: {
+      strict: {
+        message: 'The following props are not allowed: weapon',
+        value: {
+          name: 'Chapolin',
+          weapon: {
+            title: 'Hammer'
+          }
+        },
+        extraProps: ['weapon']
+      }
+    }
+  })
+})
+
+test('nested extra props with strict should return error', () => {
+  const ctx = createContext({
+    value: {
+      name: 'Chapolin',
+      weapon: {
+        title: 'Hammer',
+        damage: 1
+      }
+    },
+    schema: {
+      $type: 'object',
+      props: {
+        name: {
+          $type: 'string',
+          maxLength: 5
+        },
+        weapon: {
+          $type: 'object',
+          props: {
+            title: {
+              $type: 'string',
+              minLength: 10
+            }
+          },
+          strict: true
+        }
+      }
+    }
+  })
+
+  validator.validate(ctx)
+
+  expect(ctx.errors).toEqual({
+    $root: {
+      name: {
+        maxLength: {
+          currentLength: 8,
+          maxLength: 5,
+          message: 'The max length for this field is 5',
+          value: 'Chapolin'
+        }
+      },
+      weapon: {
+        strict: {
+          message: 'The following props are not allowed: damage',
+          value: {
+            title: 'Hammer',
+            damage: 1
+          },
+          extraProps: ['damage']
+        }
+      }
+    }
+  })
+})
+
+test('deep nested with error should not be valid', () => {
+  const ctx = createContext({
+    schema: {
+      $type: 'object',
+      props: {
+        foo: {
+          $type: 'object',
+          props: {
+            foo: {
+              $type: 'object',
+              props: {
+                foo: {
+                  $type: 'object',
+                  props: {
+                    bar: {
+                      $type: 'string',
+                      minLength: 3
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    value: {
+      foo: {
+        foo: {
+          foo: {
+            bar: 'AA'
+          }
+        }
+      }
+    }
+  })
+
+  validator.validate(ctx)
+
+  expect(ctx.errors).toEqual({
+    $root: {
+      foo: {
+        foo: {
+          foo: {
+            bar: {
+              minLength: {
+                currentLength: 2,
+                message: 'The min length for this field is 3',
+                minLength: 3,
+                value: 'AA'
+              }
+            }
+          }
+        }
+      }
+    }
+  })
+})

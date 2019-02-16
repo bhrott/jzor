@@ -42,7 +42,8 @@ const enUS = {
     },
     object: {
       errors: {
-        type: 'The value should be an object'
+        type: 'The value should be an object',
+        strict: extraProps => `The following props are not allowed: ${extraProps.join(', ')}`
       }
     },
     oneOf: {
