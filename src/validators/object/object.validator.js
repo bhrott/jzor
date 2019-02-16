@@ -1,5 +1,6 @@
 const _ = require('lodash')
 const { getCurrentTranslation } = require('../../translation')
+const { createContext } = require('../../context')
 
 const objectValidator = {
   $type: 'object',
@@ -39,12 +40,24 @@ const objectValidator = {
       const propValue = ctx.value[propKey]
       const validator = getValidators()[propSchema.$type]
 
-      ctx.addToPath(propKey)
-      validator.validate({
-        ...ctx,
+      const propContext = createContext({
         schema: propSchema,
         value: propValue
       })
+
+      ctx.addToPath(propKey)
+      validator.validate(propContext)
+      
+      propContext.path.forEach((path, index) => {
+        if (index > 0) { // skip $root
+          ctx.addToPath(path)
+        }
+      })
+
+      if (propContext.errors.$root) {
+        ctx.registerErrors(propContext.errors.$root)
+      }
+
       ctx.popPath()
     }
   }

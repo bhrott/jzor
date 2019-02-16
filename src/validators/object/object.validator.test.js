@@ -197,3 +197,62 @@ test('nested extra props with strict should return error', () => {
     }
   })
 })
+
+test('deep nested with error should not be valid', () => {
+  const ctx = createContext({
+    schema: {
+      $type: 'object',
+      props: {
+        foo: {
+          $type: 'object',
+          props: {
+            foo: {
+              $type: 'object',
+              props: {
+                foo: {
+                  $type: 'object',
+                  props: {
+                    bar: {
+                      $type: 'string',
+                      minLength: 3
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    value: {
+      foo: {
+        foo: {
+          foo: {
+            bar: 'AA'
+          }
+        }
+      }
+    }
+  })
+
+  validator.validate(ctx)
+
+  expect(ctx.errors).toEqual({
+    $root: {
+      foo: {
+        foo: {
+          foo: {
+            bar: {
+              minLength: {
+                currentLength: 2,
+                message: 'The min length for this field is 3',
+                minLength: 3,
+                value: 'AA'
+              }
+            }
+          }
+        }
+      }
+    }
+  })
+})

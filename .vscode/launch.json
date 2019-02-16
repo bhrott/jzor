@@ -7,22 +7,23 @@
     {
       "type": "node",
       "request": "launch",
-      "name": "Debug Test",
+      "name": "Debug _test.js",
       "program": "${workspaceFolder}/_test.js"
     },
     {
-      "name": "Jest",
       "type": "node",
       "request": "launch",
-      "env": { "NODE_ENV": "test" },
-      "cwd": "${workspaceRoot}",
-      "program": "${workspaceRoot}/node_modules/.bin/jest",
-      "stopOnEntry": false,
-      "args": [],
-      "runtimeArgs": ["--nolazy"],
-      "console": "internalConsole",
-      "sourceMaps": false,
-      "internalConsoleOptions": "openOnSessionStart"
+      "name": "Debug current test",
+      "program": "${workspaceFolder}/node_modules/.bin/jest",
+      "args": [
+        "${relativeFile}"
+      ],
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen",
+      "disableOptimisticBPs": true,
+      "windows": {
+        "program": "${workspaceFolder}/node_modules/jest/bin/jest",
+      }
     }
   ]
 }

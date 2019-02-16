@@ -88,3 +88,43 @@ test('get error in path should return error if exist', () => {
     value: null
   })
 })
+
+test('throw prop should throw error instead of resolve validation', () => {
+  let ctx = createContext({
+    schema: {
+      $type: 'string',
+      throw: new Error('test_error')
+    },
+    value: null
+  })
+
+  expect(() => {
+    ctx.validate()
+  }).toThrow('test_error')
+})
+
+test('nested throw prop should throw error instead resolve validation', () => {
+  let ctx = createContext({
+    schema: {
+      $type: 'array',
+      item: [
+        {
+          $type: 'object',
+          props: {
+            name: {
+              $type: 'string',
+              throw: new Error('name_invalid')
+            }
+          }
+        }
+      ]
+    },
+    value: [
+      { name: null }
+    ]
+  })
+
+  expect(() => {
+    ctx.validate()
+  }).toThrow('name_invalid')
+})

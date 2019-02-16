@@ -10,6 +10,10 @@ function createContext({ schema, value }) {
   ctx.errors = {}
   ctx.valid = true
   ctx.registerErrors = errors => {
+    if (ctx.schema.throw) {
+      throw ctx.schema.throw
+    }
+
     ctx.path.reduce((acc, cur, index) => {
       const key = `${cur}`
       if (acc[key] === undefined) {
