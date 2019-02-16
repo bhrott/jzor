@@ -42,7 +42,8 @@ const ptBR = {
     },
     object: {
       errors: {
-        type: 'O valor deve ser do tipo object'
+        type: 'O valor deve ser do tipo object',
+        strict: extraProps => `Os seguintes atributos não são permitidos: ${extraProps.join(', ')}`
       }
     },
     oneOf: {

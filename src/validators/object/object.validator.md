@@ -14,7 +14,8 @@ const schema = {
     age: {
       $type: 'number'
     }
-  }
+  },
+  strict: true
 }
 
 const value = {
@@ -30,3 +31,4 @@ const result = validateSchema(schema, value)
 | parameter | type | required | default | description |
 | --------- | ---- | -------- | ------- | ----------- |
 | props | object | yes | | The object containing the object props and the schemas for the props |
+| strict | boolean | no | false | If the value contains more props than allowed, it will be rejected |

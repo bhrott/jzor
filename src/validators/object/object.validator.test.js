@@ -104,3 +104,96 @@ test('nested invalid prop should return errors', () => {
     }
   })
 })
+
+test('extra props with strict should return error', () => {
+  const ctx = createContext({
+    value: {
+      name: 'Chapolin',
+      weapon: {
+        title: 'Hammer'
+      }
+    },
+    schema: {
+      $type: 'object',
+      props: {
+        name: {
+          $type: 'string'
+        }
+      },
+      strict: true
+    }
+  })
+
+  validator.validate(ctx)
+
+  expect(ctx.errors).toEqual({
+    $root: {
+      strict: {
+        message: 'The following props are not allowed: weapon',
+        value: {
+          name: 'Chapolin',
+          weapon: {
+            title: 'Hammer'
+          }
+        },
+        extraProps: ['weapon']
+      }
+    }
+  })
+})
+
+test('nested extra props with strict should return error', () => {
+  const ctx = createContext({
+    value: {
+      name: 'Chapolin',
+      weapon: {
+        title: 'Hammer',
+        damage: 1
+      }
+    },
+    schema: {
+      $type: 'object',
+      props: {
+        name: {
+          $type: 'string',
+          maxLength: 5
+        },
+        weapon: {
+          $type: 'object',
+          props: {
+            title: {
+              $type: 'string',
+              minLength: 10
+            }
+          },
+          strict: true
+        }
+      }
+    }
+  })
+
+  validator.validate(ctx)
+
+  expect(ctx.errors).toEqual({
+    $root: {
+      name: {
+        maxLength: {
+          currentLength: 8,
+          maxLength: 5,
+          message: 'The max length for this field is 5',
+          value: 'Chapolin'
+        }
+      },
+      weapon: {
+        strict: {
+          message: 'The following props are not allowed: damage',
+          value: {
+            title: 'Hammer',
+            damage: 1
+          },
+          extraProps: ['damage']
+        }
+      }
+    }
+  })
+})

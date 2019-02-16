@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added - 2019-02-16
+
+- Adding `strict` mode to `object` validator.
+
 ## [1.7.0] - 2019-02-05
 
 ### Added
