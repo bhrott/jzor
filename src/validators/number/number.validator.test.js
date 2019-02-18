@@ -12,7 +12,7 @@ test('invalid type should return errors', () => {
   validator.validate(ctx)
 
   expect(ctx.errors).toEqual({
-    '$root': {
+    $root: {
       type: {
         message: 'The value should be a number',
         value: ctx.value
@@ -33,7 +33,7 @@ test('invalid min value should return errors', () => {
   validator.validate(ctx)
 
   expect(ctx.errors).toEqual({
-    '$root': {
+    $root: {
       min: {
         message: 'The value should be equal or greater than 5',
         value: 4,
@@ -69,7 +69,7 @@ test('invalid max value should return errors', () => {
   validator.validate(ctx)
 
   expect(ctx.errors).toEqual({
-    '$root': {
+    $root: {
       max: {
         message: 'The value should be equal or less than 5',
         value: 6,
@@ -105,7 +105,7 @@ test('invalid positive number should return errors', () => {
   validator.validate(ctx)
 
   expect(ctx.errors).toEqual({
-    '$root': {
+    $root: {
       positive: {
         message: 'The value should be a positive number',
         value: -1
@@ -140,7 +140,7 @@ test('invalid negative number should return errors', () => {
   validator.validate(ctx)
 
   expect(ctx.errors).toEqual({
-    '$root': {
+    $root: {
       negative: {
         message: 'The value should be a negative number',
         value: 1
@@ -156,6 +156,20 @@ test('valid negative number should return no errors', () => {
       negative: true
     },
     value: -2
+  })
+
+  validator.validate(ctx)
+
+  expect(ctx.valid).toBeTruthy()
+})
+
+test('no strict mode with valid number should return no errors', () => {
+  const ctx = createContext({
+    schema: {
+      $type: 'number',
+      strict: false
+    },
+    value: '1'
   })
 
   validator.validate(ctx)

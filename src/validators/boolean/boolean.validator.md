@@ -19,4 +19,4 @@ const result = validateSchema(schema, value)
 
 | parameter | type | required | default | description |
 | --------- | ---- | -------- | ------- | ----------- |
-| strict | boolean | no | true | If false, will also check boolean like values ('true', 'false', '1', '0', 1, 0) as valid  |
+| strict | boolean | no | true | if false, will also check boolean like values ('true', 'false', '1', '0', 1, 0) as valid  |
