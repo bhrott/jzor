@@ -27,4 +27,4 @@ const result = validateSchema(schema, value)
 | max | number | no | | validate if the number is equal or less then the max |
 | positive | boolean | no | false | validate if the number is positive (0 is considered positive) |
 | negative | boolean | no | false | validate if the number is negative |
-| strict | boolean | no | true | if false, it will try to convert 
+| strict | boolean | no | true | if false, it will try to convert using `new Number(value)` |
