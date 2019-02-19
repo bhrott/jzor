@@ -1,6 +1,6 @@
 {
   "name": "jzor",
-  "version": "1.8.0",
+  "version": "1.9.0",
   "description": "JSON Schema Validator that let you know whata hell is happening!",
   "main": "index.js",
   "scripts": {

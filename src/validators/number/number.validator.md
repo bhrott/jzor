@@ -10,7 +10,8 @@ const schema = {
   min: 1,
   max: 10,
   positive: true,
-  negative: true
+  negative: true,
+  strict: true
 }
 
 const value = 5
@@ -26,3 +27,4 @@ const result = validateSchema(schema, value)
 | max | number | no | | validate if the number is equal or less then the max |
 | positive | boolean | no | false | validate if the number is positive (0 is considered positive) |
 | negative | boolean | no | false | validate if the number is negative |
+| strict | boolean | no | true | if false, it will try to convert using `new Number(value)` |

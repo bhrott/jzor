@@ -1,13 +1,18 @@
 const _ = require('lodash')
 const { getCurrentTranslation } = require('../../translation')
 
-const convertValue = value => value
-
 const dateValidator = {
   $type: 'date',
   validate: ctx => {
-    const value = (ctx.schema.convertValue || convertValue)(ctx.value)
     const translation = getCurrentTranslation()
+
+    let value = ctx.value
+
+    if (ctx.schema.convertValue) {
+      value = ctx.schema.convertValue(ctx.value)
+    } else if (ctx.schema.strict === false) {
+      value = new Date(ctx.value)
+    }
 
     if (!_.isDate(value)) {
       ctx.registerErrors({

@@ -62,3 +62,7 @@ typings/
 
 # test
 _test.js
+
+# history 
+# https://marketplace.visualstudio.com/items?itemName=xyz.local-history
+.history/

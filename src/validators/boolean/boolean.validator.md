@@ -6,10 +6,17 @@
 const { validateSchema } = require('jzor')
 
 const schema = {
-  $type: 'boolean'
+  $type: 'boolean',
+  strict: true
 }
 
 const value = true
 
 const result = validateSchema(schema, value)
 ```
+
+#### Parameters
+
+| parameter | type | required | default | description |
+| --------- | ---- | -------- | ------- | ----------- |
+| strict | boolean | no | true | if false, will also check boolean like values ('true', 'false', '1', '0', 1, 0) as valid  |

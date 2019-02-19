@@ -140,10 +140,10 @@ test('valid range should return no errors', () => {
 test('convert value before validate should return no errors', () => {
   const ctx = createContext({
     schema: {
-      $type: 'date'
+      $type: 'date',
+      convertValue: value => new Date(value)
     },
-    value: 1548448538380,
-    convertValue: value => new Date(value)
+    value: 1548448538380
   })
 
   validator.validate(ctx)
@@ -151,6 +151,19 @@ test('convert value before validate should return no errors', () => {
   expect(ctx.value).toBeTruthy()
 })
 
+test('no strict mode with non-date value should return no errors', () => {
+  const ctx = createContext({
+    schema: {
+      $type: 'date',
+      strict: false
+    },
+    value: 1548448538380
+  })
+
+  validator.validate(ctx)
+
+  expect(ctx.value).toBeTruthy()
+})
 
 //
 // utils
