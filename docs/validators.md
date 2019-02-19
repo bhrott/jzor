@@ -5,36 +5,37 @@
   * [Parameters](#parameters)
 - [Boolean](#boolean)
   * [Usage](#usage-1)
+  * [Parameters](#parameters-1)
 - [Custom](#custom)
   * [Usage](#usage-2)
-  * [Parameters](#parameters-1)
+  * [Parameters](#parameters-2)
 - [Date](#date)
   * [Usage](#usage-3)
-  * [Parameters](#parameters-2)
+  * [Parameters](#parameters-3)
 - [Email](#email)
   * [Usage](#usage-4)
-  * [Parameters](#parameters-3)
+  * [Parameters](#parameters-4)
 - [Number](#number)
   * [Usage](#usage-5)
-  * [Parameters](#parameters-4)
+  * [Parameters](#parameters-5)
 - [Object](#object)
   * [Usage](#usage-6)
-  * [Parameters](#parameters-5)
+  * [Parameters](#parameters-6)
 - [One Of](#one-of)
   * [Usage](#usage-7)
-  * [Parameters](#parameters-6)
+  * [Parameters](#parameters-7)
 - [Or](#or)
   * [Usage](#usage-8)
-  * [Parameters](#parameters-7)
+  * [Parameters](#parameters-8)
 - [Password](#password)
   * [Usage](#usage-9)
-  * [Parameters](#parameters-8)
+  * [Parameters](#parameters-9)
 - [String](#string)
   * [Usage](#usage-10)
-  * [Parameters](#parameters-9)
+  * [Parameters](#parameters-10)
 - [Url](#url)
   * [Usage](#usage-11)
-  * [Parameters](#parameters-10)
+  * [Parameters](#parameters-11)
 
 ### Array
 
@@ -79,13 +80,20 @@ const result = validateSchema(schema, value)
 const { validateSchema } = require('jzor')
 
 const schema = {
-  $type: 'boolean'
+  $type: 'boolean',
+  strict: true
 }
 
 const value = true
 
 const result = validateSchema(schema, value)
 ```
+
+#### Parameters
+
+| parameter | type | required | default | description |
+| --------- | ---- | -------- | ------- | ----------- |
+| strict | boolean | no | true | if false, will also check boolean like values ('true', 'false', '1', '0', 1, 0) as valid  |
 
 
 ### Custom
@@ -139,7 +147,8 @@ const schema = {
   convertValue: value => {
     // ...convert value before validate
     return new Date(value)
-  }
+  },
+  strict: true
 }
 
 const value = new Date()
@@ -154,6 +163,7 @@ const result = validateSchema(schema, value)
 | min | Date | no | | the minimum date allowed |
 | max | Date | no | | the maximum date allowed |
 | convertValue | function | no | return current value | if your value is not a `Date` object, you can convert to a valid date object before jzor validation |
+| strict | boolean | no | true | if false, the value will be converted to date using `new Date(value)` |
 
 
 ### Email
@@ -199,7 +209,8 @@ const schema = {
   min: 1,
   max: 10,
   positive: true,
-  negative: true
+  negative: true,
+  strict: true
 }
 
 const value = 5
@@ -215,6 +226,7 @@ const result = validateSchema(schema, value)
 | max | number | no | | validate if the number is equal or less then the max |
 | positive | boolean | no | false | validate if the number is positive (0 is considered positive) |
 | negative | boolean | no | false | validate if the number is negative |
+| strict | boolean | no | true | if false, it will try to convert using `new Number(value)` |
 
 
 ### Object
