@@ -66,7 +66,7 @@ const result = validateSchema(schema, value) // invalid
 
 | parameter | type | required | default | description |
 | --------- | ---- | -------- | ------- | ----------- |
-| reject | array of any | no | [] | The items that will be considered as valid in schema. |
+| reject | array of any | no | [] | The items that will be considered as invalid in schema. |
 
 
 ### Throw
